@@ -243,14 +243,14 @@ open class ESTabBarItemContentView: UIView {
                                                   width: s,
                                                   height: s)
                 } else {
-                    titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0,
-                                                   y: h - titleLabel.bounds.size.height - 1.0,
-                                                   width: titleLabel.bounds.size.width,
-                                                   height: titleLabel.bounds.size.height)
                     imageView.frame = CGRect.init(x: (w - s) / 2.0,
                                                   y: (h - s) / 2.0 - 6.0,
                                                   width: s,
                                                   height: s)
+                    titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0,
+                                                   y: imageView.frame.origin.y + imageView.bounds.size.height + 4.0,
+                                                   width: titleLabel.bounds.size.width,
+                                                   height: titleLabel.bounds.size.height)
                 }
             } else if !imageView.isHidden {
                 imageView.frame = CGRect.init(x: (w - s) / 2.0,
@@ -280,14 +280,14 @@ open class ESTabBarItemContentView: UIView {
             if !imageView.isHidden && !titleLabel.isHidden {
                 titleLabel.sizeToFit()
                 imageView.sizeToFit()
-                titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0,
-                                               y: h - titleLabel.bounds.size.height - 1.0,
-                                               width: titleLabel.bounds.size.width,
-                                               height: titleLabel.bounds.size.height)
                 imageView.frame = CGRect.init(x: (w - imageView.bounds.size.width) / 2.0,
                                               y: (h - imageView.bounds.size.height) / 2.0 - 6.0,
                                               width: imageView.bounds.size.width,
                                               height: imageView.bounds.size.height)
+                titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0,
+                                               y: imageView.frame.origin.y + imageView.bounds.size.height + 4.0,
+                                               width: titleLabel.bounds.size.width,
+                                               height: titleLabel.bounds.size.height)
             } else if !imageView.isHidden {
                 imageView.sizeToFit()
                 imageView.center = CGPoint.init(x: w / 2.0, y: h / 2.0)
