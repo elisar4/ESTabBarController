@@ -112,6 +112,13 @@ open class ESTabBarItemContentView: UIView {
         }
     }
     
+    open var yOff: CGFloat = 0.0 {
+        didSet {
+            self.updateLayout()
+        }
+    }
+    
+    
     /// Icon imageView's image
     open var image: UIImage? {
         didSet {
@@ -235,33 +242,33 @@ open class ESTabBarItemContentView: UIView {
                 titleLabel.sizeToFit()
                 if #available(iOS 11.0, *), isWide {
                     titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0 + (UIScreen.main.scale == 3.0 ? 14.25 : 12.25),
-                                                   y: (h - titleLabel.bounds.size.height) / 2.0,
+                                                   y: (h - titleLabel.bounds.size.height) / 2.0 + yOff,
                                                    width: titleLabel.bounds.size.width,
                                                    height: titleLabel.bounds.size.height)
                     imageView.frame = CGRect.init(x: titleLabel.frame.origin.x - s - (UIScreen.main.scale == 3.0 ? 6.0 : 5.0),
-                                                  y: (h - s) / 2.0,
+                                                  y: (h - s) / 2.0 + yOff,
                                                   width: s,
                                                   height: s)
                 } else {
                     imageView.frame = CGRect.init(x: (w - s) / 2.0,
-                                                  y: (h - s) / 2.0 - 6.0,
+                                                  y: (h - s) / 2.0 - 6.0 + yOff,
                                                   width: s,
                                                   height: s)
                     titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0,
-                                                   y: imageView.frame.origin.y + imageView.bounds.size.height + 4.0,
+                                                   y: imageView.frame.origin.y + imageView.bounds.size.height + 4.0 + yOff,
                                                    width: titleLabel.bounds.size.width,
                                                    height: titleLabel.bounds.size.height)
                 }
             } else if !imageView.isHidden {
                 imageView.frame = CGRect.init(x: (w - s) / 2.0,
-                                              y: (h - s) / 2.0,
+                                              y: (h - s) / 2.0 + yOff,
                                               width: s,
                                               height: s)
             } else if !titleLabel.isHidden {
                 titleLabel.font = UIFont.systemFont(ofSize: f)
                 titleLabel.sizeToFit()
                 titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0,
-                                               y: (h - titleLabel.bounds.size.height) / 2.0,
+                                               y: (h - titleLabel.bounds.size.height) / 2.0 + yOff,
                                                width: titleLabel.bounds.size.width,
                                                height: titleLabel.bounds.size.height)
             }
@@ -281,7 +288,7 @@ open class ESTabBarItemContentView: UIView {
                 titleLabel.sizeToFit()
                 imageView.sizeToFit()
                 imageView.frame = CGRect.init(x: (w - imageView.bounds.size.width) / 2.0,
-                                              y: (h - imageView.bounds.size.height) / 2.0 - 6.0,
+                                              y: (h - imageView.bounds.size.height) / 2.0 - 6.0 + yOff,
                                               width: imageView.bounds.size.width,
                                               height: imageView.bounds.size.height)
                 titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0,
@@ -290,10 +297,10 @@ open class ESTabBarItemContentView: UIView {
                                                height: titleLabel.bounds.size.height)
             } else if !imageView.isHidden {
                 imageView.sizeToFit()
-                imageView.center = CGPoint.init(x: w / 2.0, y: h / 2.0)
+                imageView.center = CGPoint.init(x: w / 2.0, y: h / 2.0 + yOff)
             } else if !titleLabel.isHidden {
                 titleLabel.sizeToFit()
-                titleLabel.center = CGPoint.init(x: w / 2.0, y: h / 2.0)
+                titleLabel.center = CGPoint.init(x: w / 2.0, y: h / 2.0 + yOff)
             }
             
             if let _ = badgeView.superview {
